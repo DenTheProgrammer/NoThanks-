@@ -62,8 +62,6 @@ public class Player : MonoBehaviour
         gameManager.passTokensOnCurrentCard = 0;
         hand.Add(gameManager.cardOnTheTable);
         UpdateHand();
-        //gameManager.cardOnTheTable = null;
-        gameManager.PassTurnToNextPlayer();
         gameManager.ChangeTurnState(TurnState.DrawingNextCard);
     }
 

@@ -24,7 +24,7 @@ public class Deck : MonoBehaviour
     private void GenerateDeck()//generate 1-35 cards deck
     {
         valuesList = new List<int>();
-        for (int i = 1; i < 36; i++)
+        for (int i = 3; i < 36; i++)
         {
             valuesList.Add(i);
             /*Card newCard = new Card();
