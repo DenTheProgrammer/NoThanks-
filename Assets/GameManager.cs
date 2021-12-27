@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
                     currentTurnPlayerIndex = 0;
                     PlacePlayers();
                     ChangeGameState(GameState.InProgress);
-
                 }
                 break;
             
