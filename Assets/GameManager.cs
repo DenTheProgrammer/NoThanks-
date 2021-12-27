@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public PhotonView view;
     public Deck deck;
+    public Card cardOnTheTable;
     public Transform standartCardPlace;
 
     public Player CurrentPlayer { get => players[currentTurnPlayerIndex]; }

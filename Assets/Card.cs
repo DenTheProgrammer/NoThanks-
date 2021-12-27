@@ -22,6 +22,7 @@ public class Card : MonoBehaviour, IPunObservable
     private void Start()
     {
         UpdateText();
+        FindObjectOfType<GameManager>().cardOnTheTable = this;
     }
 
     private void UpdateText()

@@ -42,8 +42,13 @@ public class Deck : MonoBehaviour
         GameObject newCard = PhotonNetwork.Instantiate(cardPrefab.name, dealWhere.position, dealWhere.rotation);
         newCard.GetComponent<Card>().SetValue(valuesList[0]);
         valuesList.RemoveAt(0);
-        Debug.LogError($"<color=black>Card with value {newCard.GetComponent<Card>().Value} dealt on the table</color>");
+        //gameManager.cardOnTheTable = newCard.GetComponent<Card>();
+        ////
+        //Debug.LogError($"<color=yellow>Card on the table is {gameManager.cardOnTheTable.Value}</color>");
+        ///
+        Debug.LogError($"<color=yellow>Card with value {newCard.GetComponent<Card>().Value} dealt on the table</color>");
     }
+
 
     private void Shuffle()
     {
