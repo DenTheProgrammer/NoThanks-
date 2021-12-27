@@ -7,6 +7,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
 
     private int minPlayersToStart = 2;
+    public int playersInTheRoom = 0;
     private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        
         UpdateRoomInfo();
     }
 
@@ -37,13 +39,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void UpdateRoomInfo()
     {
-        Debug.LogError($"<color=green>Number of players in the room: {PhotonNetwork.CurrentRoom.PlayerCount}</color>");
+        playersInTheRoom = PhotonNetwork.CurrentRoom.PlayerCount;
+        Debug.LogError($"<color=green>Number of players in the room: {playersInTheRoom}</color>");
         Debug.LogError($"<color=green>Ready to start - {IsReadyToStart()}</color>");
     }
 
-    private bool IsReadyToStart()
+    public bool IsReadyToStart()
     {
-        return PhotonNetwork.CurrentRoom.PlayerCount >= minPlayersToStart;
+        return playersInTheRoom >= minPlayersToStart;
     }
 
     public void TryStartGame()

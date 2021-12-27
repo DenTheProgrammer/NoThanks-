@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     //public Player currentTurnPlayer;
     public int currentTurnPlayerIndex;
+    public int passTokensOnCurrentCard = 0;
     public PhotonView view;
-    
+
+    public Player CurrentPlayer { get => players[currentTurnPlayerIndex]; }
+
     void Start()
     {
         gameState = GameState.WaitingToStart;
@@ -72,9 +75,14 @@ public class GameManager : MonoBehaviour
         }*/
     }
 
-    private void PassTurnToNextPlayer()
+    public void PassTurnToNextPlayer()
     {
         currentTurnPlayerIndex = (currentTurnPlayerIndex + 1) % players.Length;
+    }
+
+    public bool IsMyClientTurn()
+    {
+        return players[currentTurnPlayerIndex].view.IsMine;
     }
 
     private void PlacePlayers()//for master client to execute?
