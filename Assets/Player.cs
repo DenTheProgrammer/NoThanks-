@@ -58,5 +58,6 @@ public class Player : MonoBehaviour
         passTokens += gameManager.passTokensOnCurrentCard;
         gameManager.passTokensOnCurrentCard = 0;
         gameManager.PassTurnToNextPlayer();
+        gameManager.ChangeTurnState(TurnState.DrawingNextCard);
     }
 }

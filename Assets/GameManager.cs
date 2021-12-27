@@ -14,16 +14,21 @@ public class GameManager : MonoBehaviour
     private GameObject playerPrefab;
     public Player[] players;
     public GameState gameState;
+    public TurnState turnState;
     //public Player currentTurnPlayer;
     public int currentTurnPlayerIndex;
     public int passTokensOnCurrentCard = 0;
+    [HideInInspector]
     public PhotonView view;
+    public Deck deck;
+    public Transform standartCardPlace;
 
     public Player CurrentPlayer { get => players[currentTurnPlayerIndex]; }
 
     void Start()
     {
         gameState = GameState.WaitingToStart;
+        turnState = TurnState.DrawingNextCard;
         view = GetComponent<PhotonView>();
     }
 
@@ -51,7 +56,18 @@ public class GameManager : MonoBehaviour
                 break;
             
             case GameState.InProgress:
-                
+                switch (turnState)
+                {
+                    case TurnState.DrawingNextCard:
+                        deck.DealTopCard(standartCardPlace);
+                        ChangeTurnState(TurnState.NopeBattle);
+                        break;
+                    case TurnState.NopeBattle:
+                        //turnState happends again when one of the players takes card 
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case GameState.Scoring:
                 break;
@@ -110,10 +126,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.LogError($"<color=blue>Game state has been changed from {gameState} to {newState}</color>");
         gameState = newState;
-        
     }
 
- 
+    public void ChangeTurnState(TurnState newState)
+    {
+        Debug.LogError($"<color=pink>Game state has been changed from {turnState} to {newState}</color>");
+        turnState = newState;
+    }
+
+
 }
 
 public enum GameState
@@ -123,4 +144,10 @@ public enum GameState
     //PlacingPlayers,
     InProgress,
     Scoring
+}
+
+public enum TurnState
+{
+    DrawingNextCard,
+    NopeBattle
 }

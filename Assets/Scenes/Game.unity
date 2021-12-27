@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 518309}
   - component: {fileID: 518308}
   - component: {fileID: 518307}
+  - component: {fileID: 518310}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Untagged
@@ -218,6 +219,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518305}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &518310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46dd5cef08f7ef459d0d4c8a0329034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 8282765994693977151, guid: f2889c35ffc91b54b990b4ac3eb51df0, type: 3}
 --- !u!1 &40919614
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,9 +772,12 @@ MonoBehaviour:
   playerPrefab: {fileID: 4378334696339958692, guid: 96cb890fad869c64bb2fc191b066bfdb, type: 3}
   players: []
   gameState: 0
+  turnState: 0
   currentTurnPlayerIndex: 0
   passTokensOnCurrentCard: 0
   view: {fileID: 0}
+  deck: {fileID: 518310}
+  standartCardPlace: {fileID: 1599969956}
 --- !u!4 &584037738
 Transform:
   m_ObjectHideFlags: 0
@@ -1749,7 +1766,7 @@ GameObject:
   - component: {fileID: 1599969958}
   - component: {fileID: 1599969957}
   m_Layer: 0
-  m_Name: CardInPlay
+  m_Name: CardPlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1778,7 +1795,7 @@ BoxCollider:
   m_GameObject: {fileID: 1599969955}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1789,7 +1806,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599969955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
