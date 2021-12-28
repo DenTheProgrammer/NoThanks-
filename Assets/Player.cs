@@ -11,12 +11,11 @@ public class Player : MonoBehaviour
     public PhotonView view;
     private GameManager gameManager;
     public int passTokens = 1;
-    private List<Card> hand;
-    public Transform handTransform;
+    private PlayerHand hand;
     
     void Start()
     {
-        hand = new List<Card>();
+        hand = GetComponent<PlayerHand>();
         gameManager = FindObjectOfType<GameManager>();
         view = GetComponent<PhotonView>();
         if (view.IsMine)//enable my camera only
@@ -60,21 +59,9 @@ public class Player : MonoBehaviour
     {
         passTokens += gameManager.passTokensOnCurrentCard;
         gameManager.passTokensOnCurrentCard = 0;
-        hand.Add(gameManager.cardOnTheTable);
-        UpdateHand();
+        hand.AddToHand(gameManager.cardOnTheTable);
         gameManager.ChangeTurnState(TurnState.DrawingNextCard);
     }
 
-    private void UpdateHand()
-    {
-        Debug.LogError($"<color=yellow>{hand.Count} cards in hand</color>");
-        foreach (Card card in hand)
-        {
-            Debug.Log(card.gameObject);
-            Debug.Log(card.gameObject.transform);
-            Debug.Log(handTransform.position);
-            card.transform.position = handTransform.position;
-            card.transform.rotation = handTransform.rotation;
-        }
-    }
+    
 }
