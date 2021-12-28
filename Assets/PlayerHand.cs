@@ -41,15 +41,6 @@ public class PlayerHand : MonoBehaviour
 
     private void UpdateHand()
     {
-        /*Debug.LogError($"<color=yellow>{hand.Count} cards in hand</color>");
-        foreach (Card card in hand)
-        {
-            Debug.Log(card.gameObject);
-            Debug.Log(card.gameObject.transform);
-            Debug.Log(handTransform.position);
-            card.transform.position = handTransform.position;
-            card.transform.rotation = handTransform.rotation;
-        }*/
         SortHandToPiles();
         PlacePilesOnTheTable();
     }
@@ -106,10 +97,16 @@ public class PlayerHand : MonoBehaviour
     private void PlaceOnePileOnTable(CardPile pile, Vector3 pos, Quaternion rot)
     {
         List<Card> cards = pile.cards;
+        float eachCardLift = cardThickness * 2;
+        float firstCardLift = (eachCardLift) * pile.cards.Count;
+        pos += handTransform.up.normalized * firstCardLift;
         foreach (Card card in cards)
         {
             card.transform.position = pos;
             card.transform.rotation = rot;
+            //shift every card half-forvard(+z) and slightly Up(-y)
+            pos += handTransform.forward.normalized * (cardLength/2f);
+            pos -= handTransform.up.normalized * eachCardLift;
         }
     }
 }
